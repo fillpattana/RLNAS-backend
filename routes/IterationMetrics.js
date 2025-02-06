@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const pool = require("../index"); // Import the pool from index.js (adjust path if necessary)
+const pool = require("../index");
 
 router.get("/", async (req, res) => {
   console.log("Received request for /IterationMetric route");

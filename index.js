@@ -35,11 +35,11 @@ app.get("/test-db", async (req, res) => {
 
 // use route Graph.js
 const graphRoutes = require("./routes/Graph");
-app.use("/Graph", graphRoutes);
+app.use("/api/Graph", graphRoutes);
 
 // use route Graph.js
 const metricsRoute = require("./routes/IterationMetrics");
-app.use("/IterationMetrics", metricsRoute);
+app.use("/api/IterationMetric", metricsRoute);
 
 // WebSocket server initiate
 const wss = new Server({ noServer: true });

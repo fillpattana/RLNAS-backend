@@ -1,14 +1,23 @@
 // routes/IterationMetric.js
+
 const express = require("express");
 const router = express.Router();
 const pool = require("../index"); // Import the pool from index.js (adjust path if necessary)
 
-// Define the route for getting data from the Graph table
 router.get("/", async (req, res) => {
   console.log("Received request for /IterationMetric route");
+  const { graphId } = req.query; // Extract GraphId from query parameters
+
   try {
-    // Query the database for all rows in the "Graph" table
-    const result = await pool.query('SELECT * FROM "IterationMetric"');
+    let query = 'SELECT * FROM "IterationMetric"';
+    const params = [];
+
+    if (graphId) {
+      query += ' WHERE "GraphId" = $1';
+      params.push(graphId);
+    }
+
+    const result = await pool.query(query, params);
     console.log("Query executed successfully:", result.rows);
     res.json(result.rows); // Send the results as JSON
   } catch (err) {

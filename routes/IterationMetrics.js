@@ -1,20 +1,21 @@
-// routes/IterationMetric.js
-
 const express = require("express");
 const router = express.Router();
 const pool = require("../index"); // Import the pool from index.js (adjust path if necessary)
 
 router.get("/", async (req, res) => {
   console.log("Received request for /IterationMetric route");
-  const { graphId } = req.query; // Extract GraphId from query parameters
+  const { agentNum, episodeNum } = req.query; // Extract query parameters
 
   try {
     let query = 'SELECT * FROM "IterationMetric"';
-    const params = [];
+    let params = [];
 
-    if (graphId) {
-      query += ' WHERE "GraphId" = $1';
-      params.push(graphId);
+    if (agentNum && episodeNum) {
+      query += ` WHERE "GraphId" IN (
+                  SELECT "GraphId" FROM "Graph"
+                  WHERE "AgentNum" = $1 AND "EpisodeNum" = $2
+                )`;
+      params.push(agentNum, episodeNum);
     }
 
     const result = await pool.query(query, params);

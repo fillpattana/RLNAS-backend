@@ -45,6 +45,10 @@ app.use("/api/IterationMetric", metricsRoute);
 const AgentCountRoute = require("./routes/AgentCount");
 app.use("/api/AgentCount", AgentCountRoute);
 
+// use route Episode.js
+const EpisodeCountRoute = require("./routes/EpisodeCount");
+app.use("/api/EpisodeCount", EpisodeCountRoute);
+
 // WebSocket server initiate
 const wss = new Server({ noServer: true });
 

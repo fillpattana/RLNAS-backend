@@ -11,7 +11,19 @@ const pool = new Pool({
 });
 
 // Data to insert into Input table
-const inputLayers = [{ GraphId: 23, NodeIndex: 0 }];
+const inputLayers = [
+  { graphid: 23, nodeindex: 0 },
+  { graphid: 24, nodeindex: 0 },
+  { graphid: 25, nodeindex: 0 },
+  { graphid: 26, nodeindex: 0 },
+  { graphid: 27, nodeindex: 0 },
+  { graphid: 28, nodeindex: 0 },
+  { graphid: 29, nodeindex: 0 },
+  { graphid: 30, nodeindex: 0 },
+  { graphid: 31, nodeindex: 0 },
+  { graphid: 32, nodeindex: 0 },
+  { graphid: 52, nodeindex: 0 },
+];
 
 const insertInputLayers = async () => {
   const client = await pool.connect();
@@ -20,12 +32,12 @@ const insertInputLayers = async () => {
     await client.query("BEGIN"); // Start transaction
 
     const queryText = `
-      INSERT INTO "Inputs" ("GraphId", "NodeIndex")
+      INSERT INTO "INPUTS" ("graphid", "nodeindex")
       VALUES ($1, $2)
     `;
 
     for (const layer of inputLayers) {
-      const values = [layer.GraphId, layer.NodeIndex];
+      const values = [layer.graphid, layer.nodeindex];
       await client.query(queryText, values);
     }
 

@@ -1,0 +1,13 @@
+const inputLayers = [
+    { graphid: 23, nodeindex: 0 },
+    { graphid: 24, nodeindex: 0 },
+    { graphid: 25, nodeindex: 0 },
+    { graphid: 26, nodeindex: 0 },
+    { graphid: 27, nodeindex: 0 },
+    { graphid: 28, nodeindex: 0 },
+    { graphid: 29, nodeindex: 0 },
+    { graphid: 30, nodeindex: 0 },
+    { graphid: 31, nodeindex: 0 },
+    { graphid: 32, nodeindex: 0 },
+    { graphid: 52, nodeindex: 0 },
+  ];

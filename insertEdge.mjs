@@ -12,23 +12,23 @@ const pool = new Pool({
 
 // Data to insert into Edges table
 const edges = [
-  { GraphId: 33, Sender: 0, Receiver: 1 },
-  { GraphId: 33, Sender: 1, Receiver: 2 },
-  { GraphId: 33, Sender: 2, Receiver: 3 },
-  { GraphId: 33, Sender: 0, Receiver: 4 },
-  { GraphId: 33, Sender: 4, Receiver: 5 },
-  { GraphId: 33, Sender: 5, Receiver: 3 },
-  { GraphId: 33, Sender: 4, Receiver: 6 },
-  { GraphId: 33, Sender: 6, Receiver: 2 },
-  { GraphId: 33, Sender: 3, Receiver: 7 },
-  { GraphId: 33, Sender: 2, Receiver: 7 },
-  { GraphId: 33, Sender: 7, Receiver: 8 },
-  { GraphId: 33, Sender: 3, Receiver: 8 },
-  { GraphId: 33, Sender: 8, Receiver: 9 },
-  { GraphId: 33, Sender: 3, Receiver: 10 },
-  { GraphId: 33, Sender: 10, Receiver: 9 },
-  { GraphId: 33, Sender: 9, Receiver: 11 },
-  { GraphId: 33, Sender: 10, Receiver: 11 },
+  { graphid: 52, sender: 0, receiver: 1 },
+  { graphid: 52, sender: 1, receiver: 2 },
+  { graphid: 52, sender: 2, receiver: 3 },
+  { graphid: 52, sender: 0, receiver: 4 },
+  { graphid: 52, sender: 4, receiver: 5 },
+  { graphid: 52, sender: 5, receiver: 3 },
+  { graphid: 52, sender: 4, receiver: 6 },
+  { graphid: 52, sender: 6, receiver: 2 },
+  { graphid: 52, sender: 3, receiver: 7 },
+  { graphid: 52, sender: 2, receiver: 7 },
+  { graphid: 52, sender: 7, receiver: 8 },
+  { graphid: 52, sender: 3, receiver: 8 },
+  { graphid: 52, sender: 8, receiver: 9 },
+  { graphid: 52, sender: 3, receiver: 10 },
+  { graphid: 52, sender: 10, receiver: 9 },
+  { graphid: 52, sender: 9, receiver: 11 },
+  { graphid: 52, sender: 10, receiver: 11 },
 ];
 
 const insertEdges = async () => {
@@ -38,12 +38,12 @@ const insertEdges = async () => {
     await client.query("BEGIN"); // Start transaction
 
     const queryText = `
-      INSERT INTO "Edges" ("GraphId", "Sender", "Receiver")
+      INSERT INTO "EDGES" ("graphid", "sender", "receiver")
       VALUES ($1, $2, $3)
     `;
 
     for (const edge of edges) {
-      await client.query(queryText, [edge.GraphId, edge.Sender, edge.Receiver]);
+      await client.query(queryText, [edge.graphid, edge.sender, edge.receiver]);
     }
 
     await client.query("COMMIT"); // Commit transaction

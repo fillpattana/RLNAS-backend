@@ -1,0 +1,36 @@
+const convolutionalLayers = [
+    { graphid: 23, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 23, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+  
+    { graphid: 24, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 24, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 25, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 25, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 26, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 26, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 27, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 27, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 28, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 28, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 29, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 29, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 30, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 30, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 31, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 31, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 32, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 32, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    { graphid: 52, nodeindex: 1, activationtype: "maxpool", numoffilter: 16, padding: "same", kernelsize_x: 3, kernelsize_y: 3, stride: 1, weights: [[[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]], [[0.1, 0.54, 0.2, 0.47], [0.5, 0.32, 0.2, 0.15], [0.11, 0.76, 0.3, 0.2]]], biases: [0.2, 0.1, 0.5, 0.3] },
+    { graphid: 52, nodeindex: 4, activationtype: "sigmoid", numoffilter: 32, padding: "valid", kernelsize_x: 5, kernelsize_y: 5, stride: 2, weights: [[[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]], [[0.15, 0.25, 0.35], [0.45, 0.55, 0.65]]], biases: [0.05, 0.15] },
+
+    ];
+  

@@ -53,6 +53,10 @@ app.use("/api/EpisodeCount", EpisodeCountRoute);
 const IterationCountRoute = require("./routes/IterationCount");
 app.use("/api/IterationCount", IterationCountRoute);
 
+// use route dagJSON.js
+const dagJSONRoute = require("./routes/dagJSON");
+app.use("/api/dagJSON", dagJSONRoute);
+
 // WebSocket server initiate
 const wss = new Server({ noServer: true });
 

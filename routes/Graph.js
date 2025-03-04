@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   console.log("Received request for /Graph route");
   try {
     // Query the database for all rows in the "Graph" table
-    const result = await pool.query('SELECT * FROM "Graph"');
+    const result = await pool.query('SELECT * FROM "GRAPH"');
     console.log("Query executed successfully:", result.rows);
     res.json(result.rows); // Send the results as JSON
   } catch (err) {

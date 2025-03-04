@@ -15,7 +15,7 @@ router.get("/:agentNum", async (req, res) => {
 
   try {
     const result = await pool.query(
-      'SELECT COUNT(DISTINCT "EpisodeNum") AS "TotalEpisodes" FROM "Graph" WHERE "AgentNum" = $1',
+      'SELECT COUNT(DISTINCT episodenum) AS totalepisodes FROM "GRAPH" WHERE agentnum = $1',
       [agentNum]
     );
     console.log("Query executed successfully:", result.rows);

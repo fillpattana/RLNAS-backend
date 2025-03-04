@@ -15,7 +15,7 @@ router.get("/:timestamp", async (req, res) => {
 
   try {
     const result = await pool.query(
-      'SELECT COUNT(DISTINCT "AgentNum") AS "TotalAgents" FROM "Graph" WHERE "RunTimeStamp" = $1',
+      'SELECT COUNT(DISTINCT agentnum) AS totalagents FROM "GRAPH" WHERE runtimestamp = $1',
       [timestamp]
     );
     console.log("Query executed successfully:", result.rows);

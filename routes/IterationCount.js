@@ -20,9 +20,9 @@ router.get("/:agentNum/:episodeNum", async (req, res) => {
 
   try {
     const result = await pool.query(
-      `SELECT COUNT(DISTINCT "IterationNum") AS "TotalIterations" 
-       FROM "Graph" 
-       WHERE "AgentNum" = $1 AND "EpisodeNum" = $2`,
+      `SELECT COUNT(DISTINCT iterationnum) AS totaliterations 
+       FROM "GRAPH" 
+       WHERE agentnum = $1 AND episodenum = $2`,
       [agentNum, episodeNum]
     );
 

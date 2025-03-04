@@ -25,7 +25,7 @@ const fullyConnectedLayers = [
   },
   {
     GraphId: 23,
-    NodeIndex: 6,
+    NodeIndex: 3,
     NumOfNodes: 1,
     ActivationType: "sigmoid",
     Weights: [
@@ -47,7 +47,7 @@ const fullyConnectedLayers = [
   },
   {
     GraphId: 24,
-    NodeIndex: 3,
+    NodeIndex: 6,
     NumOfNodes: 6,
     ActivationType: "relu",
     Weights: [

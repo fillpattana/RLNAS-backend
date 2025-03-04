@@ -7,13 +7,13 @@ router.get("/", async (req, res) => {
   const { agentNum, episodeNum } = req.query; // Extract query parameters
 
   try {
-    let query = 'SELECT * FROM "IterationMetric"';
+    let query = 'SELECT * FROM "ITERATIONMETRICS"';
     let params = [];
 
     if (agentNum && episodeNum) {
-      query += ` WHERE "GraphId" IN (
-                  SELECT "GraphId" FROM "Graph"
-                  WHERE "AgentNum" = $1 AND "EpisodeNum" = $2
+      query += ` WHERE graphid IN (
+                  SELECT graphid FROM "GRAPH"
+                  WHERE agentnum = $1 AND episodenum = $2
                 )`;
       params.push(agentNum, episodeNum);
     }

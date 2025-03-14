@@ -686,7 +686,7 @@ const denseLayer2 = [
 
 const denseLayer3 = [
   {
-    graphid: 30,
+    graphid: 28,
     nodeindex: 2,
     numofnodes: 2,
     activationtype: "relu",
@@ -697,7 +697,7 @@ const denseLayer3 = [
     biases: [0.2, 0.1],
   },
   {
-    graphid: 30,
+    graphid: 28,
     nodeindex: 3,
     numofnodes: 1,
     activationtype: "sigmoid",
@@ -708,7 +708,7 @@ const denseLayer3 = [
     biases: [0.2, 0.4],
   },
   {
-    graphid: 30,
+    graphid: 28,
     nodeindex: 5,
     numofnodes: 3,
     activationtype: "tanh",
@@ -719,7 +719,7 @@ const denseLayer3 = [
     biases: [0.12, 0.22],
   },
   {
-    graphid: 30,
+    graphid: 28,
     nodeindex: 6,
     numofnodes: 6,
     activationtype: "relu",
@@ -730,7 +730,7 @@ const denseLayer3 = [
     biases: [0.2, 0.1],
   },
   {
-    graphid: 30,
+    graphid: 28,
     nodeindex: 7,
     numofnodes: 9,
     activationtype: "sigmoid",
@@ -741,7 +741,7 @@ const denseLayer3 = [
     biases: [0.2, 0.4],
   },
   {
-    graphid: 30,
+    graphid: 28,
     nodeindex: 8,
     numofnodes: 4,
     activationtype: "tanh",
@@ -750,17 +750,6 @@ const denseLayer3 = [
       [0.43, 0.56],
     ],
     biases: [0.12, 0.22],
-  },
-  {
-    graphid: 30,
-    nodeindex: 9,
-    numofnodes: 2,
-    activationtype: "relu",
-    weights: [
-      [0.1, 0.54, 0.2, 0.22],
-      [0.1, 0.24, 0.52, 0.12],
-    ],
-    biases: [0.2, 0.1],
   },
 ];
 

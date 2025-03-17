@@ -38,8 +38,16 @@ const graphRoutes = require("./routes/Graph");
 app.use("/api/Graph", graphRoutes);
 
 // use route IterationMetrics.js
-const metricsRoute = require("./routes/IterationMetrics");
-app.use("/api/IterationMetric", metricsRoute);
+const iterationMetricsRoute = require("./routes/IterationMetrics");
+app.use("/api/IterationMetric", iterationMetricsRoute);
+
+// use route OverviewIterationMetrics.js
+const OverviewIterationMetricsRoute = require("./routes/OverviewIterationMetrics");
+app.use("/api/OverviewIterationMetric", OverviewIterationMetricsRoute);
+
+// use route LossMetrics.js
+const lossMetricsRoute = require("./routes/LossMetrics");
+app.use("/api/LossMetric", lossMetricsRoute);
 
 // use route AgentCount.js
 const AgentCountRoute = require("./routes/AgentCount");

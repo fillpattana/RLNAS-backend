@@ -13,9 +13,9 @@ app.use(cors());
 const pool = new Pool({
   user: "Phil",
   host: "localhost",
-  database: "LOCAL_RLNAS",
+  database: "rl_nas",
   password: "1234",
-  port: 5432,
+  port: 5430,
 });
 
 module.exports = pool;

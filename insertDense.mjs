@@ -753,6 +753,119 @@ const denseLayer3 = [
   },
 ];
 
+const denseLayer4 = [
+  {
+    graphid: 62,
+    nodeindex: 2,
+    numofnodes: 2,
+    activationtype: "relu",
+    weights: [
+      [0.1, 0.54, 0.2, 0.22],
+      [0.1, 0.24, 0.52, 0.12],
+    ],
+    biases: [0.2, 0.1],
+  },
+  {
+    graphid: 62,
+    nodeindex: 3,
+    numofnodes: 1,
+    activationtype: "sigmoid",
+    weights: [
+      [0.5, 0.32, 0.1],
+      [0.12, 0.42, 0.33],
+    ],
+    biases: [0.2, 0.4],
+  },
+  {
+    graphid: 62,
+    nodeindex: 5,
+    numofnodes: 3,
+    activationtype: "tanh",
+    weights: [
+      [0.75, 0.12],
+      [0.43, 0.56],
+    ],
+    biases: [0.12, 0.22],
+  },
+  {
+    graphid: 62,
+    nodeindex: 6,
+    numofnodes: 6,
+    activationtype: "relu",
+    weights: [
+      [0.1, 0.54, 0.2, 0.22],
+      [0.1, 0.24, 0.52, 0.12],
+    ],
+    biases: [0.2, 0.1],
+  },
+  {
+    graphid: 62,
+    nodeindex: 7,
+    numofnodes: 9,
+    activationtype: "sigmoid",
+    weights: [
+      [0.5, 0.32, 0.1],
+      [0.12, 0.42, 0.33],
+    ],
+    biases: [0.2, 0.4],
+  },
+  {
+    graphid: 62,
+    nodeindex: 8,
+    numofnodes: 4,
+    activationtype: "tanh",
+    weights: [
+      [0.75, 0.12],
+      [0.43, 0.56],
+    ],
+    biases: [0.12, 0.22],
+  },
+  {
+    graphid: 62,
+    nodeindex: 9,
+    numofnodes: 2,
+    activationtype: "relu",
+    weights: [
+      [0.1, 0.54, 0.2, 0.22],
+      [0.1, 0.24, 0.52, 0.12],
+    ],
+    biases: [0.2, 0.1],
+  },
+  {
+    graphid: 62,
+    nodeindex: 10,
+    numofnodes: 16,
+    activationtype: "sigmoid",
+    weights: [
+      [0.5, 0.32, 0.1],
+      [0.12, 0.42, 0.33],
+    ],
+    biases: [0.2, 0.4],
+  },
+  {
+    graphid: 62,
+    nodeindex: 11,
+    numofnodes: 16,
+    activationtype: "sigmoid",
+    weights: [
+      [0.5, 0.32, 0.1],
+      [0.12, 0.42, 0.33],
+    ],
+    biases: [0.2, 0.4],
+  },
+  {
+    graphid: 62,
+    nodeindex: 12,
+    numofnodes: 19,
+    activationtype: "sigmoid",
+    weights: [
+      [0.5, 0.32, 0.1],
+      [0.12, 0.42, 0.33],
+    ],
+    biases: [0.2, 0.4],
+  },
+];
+
 const insertDenseLayers = async () => {
   const client = await pool.connect();
 
@@ -764,7 +877,7 @@ const insertDenseLayers = async () => {
       VALUES ($1, $2, $3, $4, $5::jsonb, $6)
     `;
 
-    for (const layer of denseLayer3) {
+    for (const layer of denseLayer4) {
       const values = [
         layer.graphid,
         layer.nodeindex,

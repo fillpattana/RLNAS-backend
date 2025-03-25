@@ -83,6 +83,27 @@ wss.on("connection", (ws) => {
 });
 
 // Listen for PostgreSQL notifications
+// pool.connect((err, client) => {
+//   if (err) {
+//     console.error("Error connecting to the database:", err);
+//     return;
+//   }
+
+//   console.log("Listening for PostgreSQL notifications...");
+//   client.query("LISTEN table_update"); // Replace 'table_update' with your notification channel
+
+//   client.on("notification", (msg) => {
+//     console.log("Notification received:", msg.payload);
+
+//     // Broadcast the notification to all WebSocket clients
+//     wss.clients.forEach((client) => {
+//       if (client.readyState === 1) {
+//         client.send(msg.payload); // Send payload to WebSocket clients
+//       }
+//     });
+//   });
+// });
+
 pool.connect((err, client) => {
   if (err) {
     console.error("Error connecting to the database:", err);
@@ -90,10 +111,12 @@ pool.connect((err, client) => {
   }
 
   console.log("Listening for PostgreSQL notifications...");
-  client.query("LISTEN table_update"); // Replace 'table_update' with your notification channel
+
+  // Listen for the new finalized_update trigger
+  client.query("LISTEN finalized_update");
 
   client.on("notification", (msg) => {
-    console.log("Notification received:", msg.payload);
+    console.log("Finalized update received:", msg.payload);
 
     // Broadcast the notification to all WebSocket clients
     wss.clients.forEach((client) => {

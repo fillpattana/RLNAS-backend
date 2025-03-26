@@ -45,6 +45,10 @@ app.use("/api/IterationMetric", iterationMetricsRoute);
 const OverviewIterationMetricsRoute = require("./routes/OverviewIterationMetrics");
 app.use("/api/OverviewIterationMetric", OverviewIterationMetricsRoute);
 
+// use route OverviewAccMetrics.js
+const OverviewAccMetricsRoute = require("./routes/OverviewAccMetrics");
+app.use("/api/OverviewAccMetric", OverviewAccMetricsRoute);
+
 // use route LossMetrics.js
 const lossMetricsRoute = require("./routes/LossMetrics");
 app.use("/api/LossMetric", lossMetricsRoute);

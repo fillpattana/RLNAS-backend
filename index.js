@@ -41,13 +41,13 @@ app.use("/api/Graph", graphRoutes);
 const iterationMetricsRoute = require("./routes/IterationMetrics");
 app.use("/api/IterationMetric", iterationMetricsRoute);
 
-// use route OverviewIterationMetrics.js
-const OverviewIterationMetricsRoute = require("./routes/OverviewIterationMetrics");
-app.use("/api/OverviewIterationMetric", OverviewIterationMetricsRoute);
-
 // use route OverviewAccMetrics.js
 const OverviewAccMetricsRoute = require("./routes/OverviewAccMetrics");
 app.use("/api/OverviewAccMetric", OverviewAccMetricsRoute);
+
+// use route OverviewFlopMetrics.js
+const OverviewFlopMetricsRoute = require("./routes/OverviewFlopMetrics");
+app.use("/api/OverviewFlopMetrics", OverviewFlopMetricsRoute);
 
 // use route LossMetrics.js
 const lossMetricsRoute = require("./routes/LossMetrics");

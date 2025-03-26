@@ -47,7 +47,7 @@ app.use("/api/OverviewAccMetric", OverviewAccMetricsRoute);
 
 // use route OverviewFlopMetrics.js
 const OverviewFlopMetricsRoute = require("./routes/OverviewFlopMetrics");
-app.use("/api/OverviewFlopMetrics", OverviewFlopMetricsRoute);
+app.use("/api/OverviewFlopMetric", OverviewFlopMetricsRoute);
 
 // use route LossMetrics.js
 const lossMetricsRoute = require("./routes/LossMetrics");

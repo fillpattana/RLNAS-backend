@@ -13,9 +13,9 @@ app.use(cors());
 const pool = new Pool({
   user: "Phil",
   host: "localhost",
-  database: "rl_nas",
+  database: "LOCAL_RLNAS",
   password: "1234",
-  port: 5430,
+  port: 5432,
 });
 
 module.exports = pool;
@@ -41,9 +41,13 @@ app.use("/api/Graph", graphRoutes);
 const iterationMetricsRoute = require("./routes/IterationMetrics");
 app.use("/api/IterationMetric", iterationMetricsRoute);
 
-// use route OverviewIterationMetrics.js
-const OverviewIterationMetricsRoute = require("./routes/OverviewIterationMetrics");
-app.use("/api/OverviewIterationMetric", OverviewIterationMetricsRoute);
+// use route OverviewAccMetrics.js
+const OverviewAccMetricsRoute = require("./routes/OverviewAccMetrics");
+app.use("/api/OverviewAccMetric", OverviewAccMetricsRoute);
+
+// use route OverviewFlopMetrics.js
+const OverviewFlopMetricsRoute = require("./routes/OverviewFlopMetrics");
+app.use("/api/OverviewFlopMetric", OverviewFlopMetricsRoute);
 
 // use route LossMetrics.js
 const lossMetricsRoute = require("./routes/LossMetrics");
@@ -83,6 +87,27 @@ wss.on("connection", (ws) => {
 });
 
 // Listen for PostgreSQL notifications
+// pool.connect((err, client) => {
+//   if (err) {
+//     console.error("Error connecting to the database:", err);
+//     return;
+//   }
+
+//   console.log("Listening for PostgreSQL notifications...");
+//   client.query("LISTEN table_update"); // Replace 'table_update' with your notification channel
+
+//   client.on("notification", (msg) => {
+//     console.log("Notification received:", msg.payload);
+
+//     // Broadcast the notification to all WebSocket clients
+//     wss.clients.forEach((client) => {
+//       if (client.readyState === 1) {
+//         client.send(msg.payload); // Send payload to WebSocket clients
+//       }
+//     });
+//   });
+// });
+
 pool.connect((err, client) => {
   if (err) {
     console.error("Error connecting to the database:", err);
@@ -90,10 +115,12 @@ pool.connect((err, client) => {
   }
 
   console.log("Listening for PostgreSQL notifications...");
-  client.query("LISTEN table_update"); // Replace 'table_update' with your notification channel
+
+  // Listen for the new finalized_update trigger
+  client.query("LISTEN finalized_update");
 
   client.on("notification", (msg) => {
-    console.log("Notification received:", msg.payload);
+    console.log("Finalized update received:", msg.payload);
 
     // Broadcast the notification to all WebSocket clients
     wss.clients.forEach((client) => {

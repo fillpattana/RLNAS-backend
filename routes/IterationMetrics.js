@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
       query += ` WHERE graphid IN (
                   SELECT graphid FROM "GRAPH"
                   WHERE agentnum = $1 AND episodenum = $2
+                  ORDER BY graphid ASC
                 )`;
       params.push(agentNum, episodeNum);
     }

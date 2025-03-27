@@ -555,6 +555,53 @@ const convolutionalLayers2 = [
   },
 ];
 
+const convolutionalLayers3 = [
+  {
+    graphid: 62,
+    nodeindex: 1,
+    activationtype: "maxpool",
+    numoffilter: 16,
+    padding: "same",
+    kernelsize_x: 3,
+    kernelsize_y: 3,
+    stride: 1,
+    weights: [
+      [
+        [0.1, 0.54, 0.2, 0.47],
+        [0.5, 0.32, 0.2, 0.15],
+        [0.11, 0.76, 0.3, 0.2],
+      ],
+      [
+        [0.1, 0.54, 0.2, 0.47],
+        [0.5, 0.32, 0.2, 0.15],
+        [0.11, 0.76, 0.3, 0.2],
+      ],
+    ],
+    biases: [0.2, 0.1, 0.5, 0.3],
+  },
+  {
+    graphid: 62,
+    nodeindex: 4,
+    activationtype: "sigmoid",
+    numoffilter: 32,
+    padding: "valid",
+    kernelsize_x: 5,
+    kernelsize_y: 5,
+    stride: 2,
+    weights: [
+      [
+        [0.15, 0.25, 0.35],
+        [0.45, 0.55, 0.65],
+      ],
+      [
+        [0.15, 0.25, 0.35],
+        [0.45, 0.55, 0.65],
+      ],
+    ],
+    biases: [0.05, 0.15],
+  },
+];
+
 const insertConvolutionalLayers = async () => {
   const client = await pool.connect();
 
@@ -567,7 +614,7 @@ const insertConvolutionalLayers = async () => {
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::jsonb, $10)
     `;
 
-    for (const layer of convolutionalLayers2) {
+    for (const layer of convolutionalLayers3) {
       const values = [
         layer.graphid,
         layer.nodeindex,

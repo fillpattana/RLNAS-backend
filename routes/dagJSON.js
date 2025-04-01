@@ -11,6 +11,8 @@ router.get("/:timestamp/:agentNum/:episodeNum/:iterationNum", async (req, res) =
 
   const { timestamp, agentNum, episodeNum, iterationNum } = req.params;
 
+  console.log("DAG JSON Parameters Received: AGENTNUM", agentNum, "EPISODENUM", episodeNum, "ITERATIONNUM", iterationNum)
+
   // Validate input parameters
   if (isNaN(agentNum) || isNaN(episodeNum) || isNaN(iterationNum)) {
     return res

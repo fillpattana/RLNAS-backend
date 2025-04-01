@@ -4,12 +4,12 @@ const moment = require("moment");
 const pool = require("../index"); // Ensure this correctly initializes the PostgreSQL connection
 
 // Route to get the graph structure based on AgentNum, EpisodeNum, and IterationNum
-router.get("/:agentNum/:episodeNum/:iterationNum", async (req, res) => {
+router.get("/:timestamp/:agentNum/:episodeNum/:iterationNum", async (req, res) => {
   console.log(
-    "Received request for /api/graph/:agentNum/:episodeNum/:iterationNum"
+    "Received request for /api/dagJSON/:agentNum/:episodeNum/:iterationNum"
   );
 
-  const { agentNum, episodeNum, iterationNum } = req.params;
+  const { timestamp, agentNum, episodeNum, iterationNum } = req.params;
 
   // Validate input parameters
   if (isNaN(agentNum) || isNaN(episodeNum) || isNaN(iterationNum)) {
@@ -24,7 +24,7 @@ router.get("/:agentNum/:episodeNum/:iterationNum", async (req, res) => {
       WITH SelectedGraph AS (
           SELECT graphid 
           FROM "GRAPH" 
-          WHERE agentnum = $1 AND episodenum = $2 AND iterationnum = $3
+          WHERE runtimestamp = $1 AND agentnum = $2 AND episodenum = $3 AND iterationnum = $4
       ),
       Nodes AS (
           SELECT 
@@ -91,6 +91,7 @@ router.get("/:agentNum/:episodeNum/:iterationNum", async (req, res) => {
 
     // Execute query
     const result = await pool.query(query, [
+      timestamp,
       agentNum,
       episodeNum,
       iterationNum,

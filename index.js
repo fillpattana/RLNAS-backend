@@ -13,9 +13,9 @@ app.use(cors());
 const pool = new Pool({
   user: "Phil",
   host: "localhost",
-  database: "LOCAL_RLNAS",
+  database: "rlnas_ver2",
   password: "1234",
-  port: 5432,
+  port: 5430,
 });
 
 module.exports = pool;
@@ -94,7 +94,7 @@ wss.on("connection", (ws) => {
 //   }
 
 //   console.log("Listening for PostgreSQL notifications...");
-//   client.query("LISTEN table_update"); // Replace 'table_update' with your notification channel
+//   client.query("LISTEN table_update");
 
 //   client.on("notification", (msg) => {
 //     console.log("Notification received:", msg.payload);

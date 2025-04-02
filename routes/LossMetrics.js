@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const moment = require("moment");
 const pool = require("../index");
 
 router.get("/:timestamp", async (req, res) => {
@@ -8,7 +9,7 @@ router.get("/:timestamp", async (req, res) => {
   const { timestamp } = req.params; // Get timestamp from route parameter
   console.log("Timestamp received:", timestamp);
 
-  if (isNaN(Date.parse(timestamp))) {
+  if (!moment(timestamp, "YYYY-MM-DD HH:mm:ss.SSSSSS", true).isValid()) {
     return res.status(400).json({ error: "Invalid timestamp format" });
   }
 

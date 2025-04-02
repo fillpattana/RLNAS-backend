@@ -10,7 +10,7 @@ router.get("/:timestamp", async (req, res) => {
   const { timestamp } = req.params; // Get timestamp from route parameter
   console.log("Timestamp received:", timestamp);
 
-  if (!moment(timestamp, "YYYY-MM-DD HH:mm:ss.SSSSSS", true).isValid()){
+  if (!moment(timestamp, "YYYY-MM-DD HH:mm:ss.SSSSSS", true).isValid()) {
     return res.status(400).json({ error: "Invalid timestamp format" });
   }
 

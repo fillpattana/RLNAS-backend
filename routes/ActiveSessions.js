@@ -4,7 +4,7 @@ const pool = require("../index");
 
 // Route to get all session information
 router.get("/", async (req, res) => {
-  console.log("Received request for /api/activesessions");
+  console.log("Received request for /api/ActiveSessions");
 
   try {
     // Query to fetch all session information

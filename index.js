@@ -13,7 +13,7 @@ app.use(cors());
 const pool = new Pool({
   user: "Phil",
   host: "localhost",
-  database: "rlnas_ver2",
+  database: "rlnas_ver3",
   password: "1234",
   port: 5430,
 });
@@ -36,6 +36,10 @@ app.get("/test-db", async (req, res) => {
 // use route Graph.js
 const graphRoutes = require("./routes/Graph");
 app.use("/api/Graph", graphRoutes);
+
+// use route ActiveSessions.js
+const activeSessionsRoute = require("./routes/ActiveSessions");
+app.use("/api/activesessions", activeSessionsRoute);
 
 // use route IterationMetrics.js
 const iterationMetricsRoute = require("./routes/IterationMetrics");

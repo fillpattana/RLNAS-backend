@@ -1,11 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const moment = require("moment");
 const pool = require("../index");
 
-router.get("/", async (req, res) => {
-  console.log("Received request for /IterationMetric route");
+router.get("/:timestamp", async (req, res) => {
+  console.log("Received request for /IterationMetric/:timestamp route");
+  const { timestamp } = req.params;
   const { agentNum, episodeNum } = req.query; // Extract query parameters
-
+  if (!moment(timestamp, "YYYY-MM-DD HH:mm:ss.SSSSSS", true).isValid()){
+    return res.status(400).json({ error: "Invalid timestamp format" });
+  }
+  console.log("Timestamp received AGENTS PERFORMANCE CHART:", timestamp);
   try {
     let query = 'SELECT * FROM "ITERATIONMETRICS"';
     let params = [];
@@ -13,10 +18,10 @@ router.get("/", async (req, res) => {
     if (agentNum && episodeNum) {
       query += ` WHERE graphid IN (
                   SELECT graphid FROM "GRAPH"
-                  WHERE agentnum = $1 AND episodenum = $2
+                  WHERE runtimestamp = $1 AND agentnum = $2 AND episodenum = $3
                   ORDER BY graphid ASC
                 )`;
-      params.push(agentNum, episodeNum);
+      params.push(timestamp, agentNum, episodeNum);
     }
 
     const result = await pool.query(query, params);

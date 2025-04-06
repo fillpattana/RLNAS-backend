@@ -37,6 +37,7 @@ app.get("/test-db", async (req, res) => {
 const graphRoutes = require("./routes/Graph");
 app.use("/api/Graph", graphRoutes);
 
+// use route insertNewSession.js
 const insertNewSessionRoutes = require("./routes/InsertNewSession");
 app.use("/api/newsession", insertNewSessionRoutes);
 

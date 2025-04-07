@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
       SELECT 
           jsonb_build_object(
               'sessionInfo', jsonb_build_object(
+                  'sessionid', s.sessionid,
                   'runtimestamp', s.runtimestamp,
                   'endtimestamp', s.endtimestamp,
                   'datasetname', sc.datasetname

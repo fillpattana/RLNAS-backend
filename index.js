@@ -41,6 +41,10 @@ app.use("/api/Graph", graphRoutes);
 const insertNewSessionRoutes = require("./routes/InsertNewSession");
 app.use("/api/newsession", insertNewSessionRoutes);
 
+// use route StopSession.js
+const StopSessionRoutes = require("./routes/StopSession");
+app.use("/api/stopsession", StopSessionRoutes);
+
 // use route ActiveSessions.js
 const activeSessionsRoute = require("./routes/ActiveSessions");
 app.use("/api/activesessions", activeSessionsRoute);

@@ -4,111 +4,326 @@ const moment = require("moment");
 const pool = require("../index"); // Ensure this correctly initializes the PostgreSQL connection
 
 // Route to get the graph structure based on AgentNum, EpisodeNum, and IterationNum
-router.get("/:timestamp/:agentNum/:episodeNum/:iterationNum", async (req, res) => {
-  console.log(
-    "Received request for /api/dagJSON/:agentNum/:episodeNum/:iterationNum"
-  );
+router.get(
+  "/:timestamp/:agentNum/:episodeNum/:iterationNum",
+  async (req, res) => {
+    console.log(
+      "Received request for /api/dagJSON/:agentNum/:episodeNum/:iterationNum"
+    );
 
-  const { timestamp, agentNum, episodeNum, iterationNum } = req.params;
+    const { timestamp, agentNum, episodeNum, iterationNum } = req.params;
 
-  console.log("DAG JSON Parameters Received: AGENTNUM", agentNum, "EPISODENUM", episodeNum, "ITERATIONNUM", iterationNum)
-
-  // Validate input parameters
-  if (isNaN(agentNum) || isNaN(episodeNum) || isNaN(iterationNum)) {
-    return res
-      .status(400)
-      .json({ error: "Invalid parameters, must be numbers" });
-  }
-
-  try {
-    // Query to fetch the graph structure
-    const query = `
-      WITH SelectedGraph AS (
-          SELECT graphid 
-          FROM "GRAPH" 
-          WHERE runtimestamp = $1 AND agentnum = $2 AND episodenum = $3 AND iterationnum = $4
-      ),
-      Nodes AS (
-          SELECT 
-              nodeindex,
-              'convolutional' AS type,
-              activationtype AS activation,
-              weights AS weights,
-              biases AS biases
-          FROM "CONV_LAYER"
-          WHERE graphid = (SELECT graphid FROM SelectedGraph)
-          UNION ALL
-          SELECT 
-              nodeindex,
-              'dense' AS type,
-              activationtype AS activation,
-              weights AS weights,
-              biases AS biases
-          FROM "DENSE_LAYER"
-          WHERE graphid = (SELECT graphid FROM SelectedGraph)
-          UNION ALL
-          SELECT 
-              nodeindex,
-              'input' AS type,
-              NULL AS activation,
-              NULL AS weights,
-              NULL AS biases
-          FROM "INPUTS"
-          WHERE graphid = (SELECT graphid FROM SelectedGraph)
-      ),
-      Edges AS (
-          SELECT 
-              array_agg(sender) AS senders,
-              array_agg(receiver) AS receivers
-          FROM "EDGES"
-          WHERE graphid = (SELECT graphid FROM SelectedGraph)
-      )
-      SELECT jsonb_build_object(
-          'Graph', jsonb_build_object(
-              'nodes', jsonb_agg(
-                  CASE 
-                      WHEN type = 'input' THEN jsonb_build_object(
-                          'index', nodeindex,
-                          'type', type
-                      )
-                      ELSE jsonb_build_object(
-                          'index', nodeindex,
-                          'type', type,
-                          'activation', jsonb_build_object('type', activation),
-                          'params', jsonb_build_object(
-                              'weights', weights,
-                              'biases', biases
-                          )
-                      )
-                  END
-              ),
-              'edges', (SELECT jsonb_build_object(
-                  'senders', senders,
-                  'receivers', receivers
-              ) FROM EDGES)
-          )
-      ) AS graph_structure
-      FROM NODES;
-    `;
-
-    // Execute query
-    const result = await pool.query(query, [
-      timestamp,
+    console.log(
+      "DAG JSON Parameters Received: AGENTNUM",
       agentNum,
+      "EPISODENUM",
       episodeNum,
-      iterationNum,
-    ]);
+      "ITERATIONNUM",
+      iterationNum
+    );
 
-    // Check if a graph was found
-    if (!result.rows.length || !result.rows[0].graph_structure) {
-      return res.status(404).json({ error: "Graph not found" });
+    // Validate input parameters
+    if (isNaN(agentNum) || isNaN(episodeNum) || isNaN(iterationNum)) {
+      return res
+        .status(400)
+        .json({ error: "Invalid parameters, must be numbers" });
     }
 
-    res.json(result.rows[0].graph_structure);
-  } catch (err) {
-    console.error("Error querying the database:", err);
-    res.status(500).send("Server Error");
+    try {
+      //1st////1st////1st////1st////1st////1st////1st////1st////1st////1st////1st////1st////1st////1st//
+
+      // Query to fetch the graph structure
+      // const query = `
+      //   WITH SelectedGraph AS (
+      //       SELECT graphid
+      //       FROM "GRAPH"
+      //       WHERE runtimestamp = $1 AND agentnum = $2 AND episodenum = $3 AND iterationnum = $4
+      //   ),
+      //   Nodes AS (
+      //       SELECT
+      //           nodeindex,
+      //           'convolutional' AS type,
+      //           activationtype AS activation,
+      //           weights AS weights,
+      //           biases AS biases
+      //       FROM "CONV_LAYER"
+      //       WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      //       UNION ALL
+      //       SELECT
+      //           nodeindex,
+      //           'dense' AS type,
+      //           activationtype AS activation,
+      //           weights AS weights,
+      //           biases AS biases
+      //       FROM "DENSE_LAYER"
+      //       WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      //       UNION ALL
+      //       SELECT
+      //           nodeindex,
+      //           'input' AS type,
+      //           NULL AS activation,
+      //           NULL AS weights,
+      //           NULL AS biases
+      //       FROM "INPUTS"
+      //       WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      //   ),
+      //   Edges AS (
+      //       SELECT
+      //           array_agg(sender) AS senders,
+      //           array_agg(receiver) AS receivers
+      //       FROM "EDGES"
+      //       WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      //   )
+      //   SELECT jsonb_build_object(
+      //       'Graph', jsonb_build_object(
+      //           'nodes', jsonb_agg(
+      //               CASE
+      //                   WHEN type = 'input' THEN jsonb_build_object(
+      //                       'index', nodeindex,
+      //                       'type', type
+      //                   )
+      //                   ELSE jsonb_build_object(
+      //                       'index', nodeindex,
+      //                       'type', type,
+      //                       'activation', jsonb_build_object('type', activation),
+      //                       'params', jsonb_build_object(
+      //                           'weights', weights,
+      //                           'biases', biases
+      //                       )
+      //                   )
+      //               END
+      //           ),
+      //           'edges', (SELECT jsonb_build_object(
+      //               'senders', senders,
+      //               'receivers', receivers
+      //           ) FROM EDGES)
+      //       )
+      //   ) AS graph_structure
+      //   FROM NODES;
+      // `;
+
+      //2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd////2nd//
+      // const query = `
+      //   WITH SelectedGraph AS (
+      //       SELECT graphid
+      //       FROM "GRAPH"
+      //       WHERE runtimestamp = $1 AND agentnum = $2 AND episodenum = $3 AND iterationnum = $4
+      //   ),
+      //   Nodes AS (
+      //       SELECT
+      //           nodeindex,
+      //           'convolutional' AS type,
+      //           activationtype AS activation,
+      //           weights,
+      //           biases,
+      //           padding,
+      //           numoffilter,
+      //           stride,
+      //           kernelsize_x,
+      //           kernelsize_y
+      //       FROM "CONV_LAYER"
+      //       WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      //       UNION ALL
+      //       SELECT
+      //           nodeindex,
+      //           'dense' AS type,
+      //           activationtype AS activation,
+      //           weights,
+      //           biases,
+      //           NULL AS padding,
+      //           NULL AS numoffilter,
+      //           NULL AS stride,
+      //           NULL AS kernelsize_x,
+      //           NULL AS kernelsize_y
+      //       FROM "DENSE_LAYER"
+      //       WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      //       UNION ALL
+      //       SELECT
+      //           nodeindex,
+      //           'input' AS type,
+      //           NULL AS activation,
+      //           NULL AS weights,
+      //           NULL AS biases,
+      //           NULL AS padding,
+      //           NULL AS numoffilter,
+      //           NULL AS stride,
+      //           NULL AS kernelsize_x,
+      //           NULL AS kernelsize_y
+      //       FROM "INPUTS"
+      //       WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      //   ),
+      //   Edges AS (
+      //       SELECT
+      //           array_agg(sender) AS senders,
+      //           array_agg(receiver) AS receivers
+      //       FROM "EDGES"
+      //       WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      //   )
+      //   SELECT jsonb_build_object(
+      //       'Graph', jsonb_build_object(
+      //           'nodes', jsonb_agg(
+      //               CASE
+      //                   WHEN type = 'input' THEN jsonb_build_object(
+      //                       'index', nodeindex,
+      //                       'type', type
+      //                   )
+      //                   WHEN type = 'dense' THEN jsonb_build_object(
+      //                       'index', nodeindex,
+      //                       'type', type,
+      //                       'activation', jsonb_build_object('type', activation),
+      //                       'params', jsonb_build_object(
+      //                           'weights', weights,
+      //                           'biases', biases
+      //                       )
+      //                   )
+      //                   WHEN type = 'convolutional' THEN jsonb_build_object(
+      //                       'index', nodeindex,
+      //                       'type', type,
+      //                       'activation', jsonb_build_object('type', activation),
+      //                       'params', jsonb_build_object(
+      //                           'weights', weights,
+      //                           'biases', biases,
+      //                           'padding', padding,
+      //                           'numoffilter', numoffilter,
+      //                           'stride', stride,
+      //                           'kernelsize_x', kernelsize_x,
+      //                           'kernelsize_y', kernelsize_y
+      //                       )
+      //                   )
+      //               END
+      //           ),
+      //           'edges', (SELECT jsonb_build_object(
+      //               'senders', senders,
+      //               'receivers', receivers
+      //           ) FROM Edges)
+      //       )
+      //   ) AS graph_structure
+      //   FROM Nodes;
+      // `;
+
+      //3rd//
+
+      const query = `
+  WITH SelectedGraph AS (
+      SELECT graphid
+      FROM "GRAPH"
+      WHERE runtimestamp = $1 AND agentnum = $2 AND episodenum = $3 AND iterationnum = $4
+  ),
+  Nodes AS (
+      SELECT
+          nodeindex,
+          'convolutional' AS type,
+          activationtype AS activation,
+          weights,
+          biases,
+          padding,
+          numoffilter,
+          stride,
+          kernelsize_x,
+          kernelsize_y,
+          NULL AS numofnodes
+      FROM "CONV_LAYER"
+      WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      UNION ALL
+      SELECT
+          nodeindex,
+          'dense' AS type,
+          activationtype AS activation,
+          weights,
+          biases,
+          NULL AS padding,
+          NULL AS numoffilter,
+          NULL AS stride,
+          NULL AS kernelsize_x,
+          NULL AS kernelsize_y,
+          numofnodes
+      FROM "DENSE_LAYER"
+      WHERE graphid = (SELECT graphid FROM SelectedGraph)
+      UNION ALL
+      SELECT
+          nodeindex,
+          'input' AS type,
+          NULL AS activation,
+          NULL AS weights,
+          NULL AS biases,
+          NULL AS padding,
+          NULL AS numoffilter,
+          NULL AS stride,
+          NULL AS kernelsize_x,
+          NULL AS kernelsize_y,
+          NULL AS numofnodes
+      FROM "INPUTS"
+      WHERE graphid = (SELECT graphid FROM SelectedGraph)
+  ),
+  Edges AS (
+      SELECT
+          array_agg(sender) AS senders,
+          array_agg(receiver) AS receivers
+      FROM "EDGES"
+      WHERE graphid = (SELECT graphid FROM SelectedGraph)
+  )
+  SELECT jsonb_build_object(
+      'Graph', jsonb_build_object(
+          'nodes', jsonb_agg(
+              CASE
+                  WHEN type = 'input' THEN jsonb_build_object(
+                      'index', nodeindex,
+                      'type', type
+                  )
+                  WHEN type = 'dense' THEN jsonb_build_object(
+                      'index', nodeindex,
+                      'type', type,
+                      'activation', jsonb_build_object('type', activation),
+                      'params', jsonb_build_object(
+                          'weights', weights,
+                          'biases', biases,
+                          'numofnodes', numofnodes
+                      )
+                  )
+                  WHEN type = 'convolutional' THEN jsonb_build_object(
+                      'index', nodeindex,
+                      'type', type,
+                      'activation', jsonb_build_object('type', activation),
+                      'params', jsonb_build_object(
+                          'weights', weights,
+                          'biases', biases,
+                          'padding', padding,
+                          'numoffilter', numoffilter,
+                          'stride', stride,
+                          'kernelsize_x', kernelsize_x,
+                          'kernelsize_y', kernelsize_y
+                      )
+                  )
+              END
+          ),
+          'edges', (SELECT jsonb_build_object(
+              'senders', senders,
+              'receivers', receivers
+          ) FROM Edges)
+      )
+  ) AS graph_structure
+  FROM Nodes;
+`;
+
+      // Execute query
+      const result = await pool.query(query, [
+        timestamp,
+        agentNum,
+        episodeNum,
+        iterationNum,
+      ]);
+
+      // Check if a graph was found
+      if (!result.rows.length || !result.rows[0].graph_structure) {
+        return res.status(404).json({ error: "Graph not found" });
+      }
+
+      res.json(result.rows[0].graph_structure);
+    } catch (err) {
+      console.error("Error querying the database:", err);
+      res.status(500).send("Server Error");
+    }
   }
-});
+);
 
 module.exports = router;

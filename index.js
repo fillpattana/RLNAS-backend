@@ -123,6 +123,7 @@ pool.connect((err, client) => {
   client.query("LISTEN new_lossmetrics");
   client.query("LISTEN finalized_update");
   client.query("LISTEN sessions_change");
+  client.query("LISTEN new_sessionsconfig");
 
   console.log("Listening for PostgreSQL notifications...");
 

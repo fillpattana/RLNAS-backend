@@ -3,10 +3,12 @@ const router = express.Router();
 const pool = require("../index");
 
 // Define the route for getting the total number of Episodes from the Graph table
-router.get("/:agentNum", async (req, res) => {
-  console.log("Received request for /api/EpisodeCount/:agentNum route");
+router.get("/:runtimestamp/:agentNum", async (req, res) => {
+  console.log(
+    "Received request for /api/EpisodeCount/:runtimestamp/:agentNum route"
+  );
 
-  const { agentNum } = req.params; // Get agentNum from route parameter
+  const { runtimestamp, agentNum } = req.params; // Get agentNum from route parameter
   console.log("AgentNum received:", agentNum);
 
   if (isNaN(agentNum)) {
@@ -15,8 +17,8 @@ router.get("/:agentNum", async (req, res) => {
 
   try {
     const result = await pool.query(
-      'SELECT COUNT(DISTINCT episodenum) AS totalepisodes FROM "GRAPH" WHERE agentnum = $1',
-      [agentNum]
+      'SELECT COUNT(DISTINCT episodenum) AS totalepisodes FROM "GRAPH" WHERE runtimestamp = $1 AND agentnum = $2',
+      [runtimestamp, agentNum]
     );
     console.log("Query executed successfully:", result.rows);
     res.json(result.rows[0]);

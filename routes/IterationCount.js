@@ -3,14 +3,12 @@ const router = express.Router();
 const pool = require("../index");
 
 // Define the route for getting the total number of Iterations from the Graph table
-router.get("/:agentNum/:episodeNum", async (req, res) => {
+router.get("/:runtimestamp/:agentNum/:episodeNum", async (req, res) => {
   console.log(
-    "Received request for /api/IterationCount/:agentNum/:episodeNum route"
+    "Received request for /api/IterationCount/:runtimestamp/:agentNum/:episodeNum route"
   );
 
-  const { agentNum, episodeNum } = req.params; // Get agentNum and episodeNum from route parameters
-  console.log("agentNum received:", agentNum);
-  console.log("episodeNum received:", episodeNum);
+  const { runtimestamp, agentNum, episodeNum } = req.params; // Get agentNum and episodeNum from route parameters
 
   if (isNaN(agentNum) || isNaN(episodeNum)) {
     return res
@@ -22,8 +20,8 @@ router.get("/:agentNum/:episodeNum", async (req, res) => {
     const result = await pool.query(
       `SELECT COUNT(DISTINCT iterationnum) AS totaliterations 
        FROM "GRAPH" 
-       WHERE agentnum = $1 AND episodenum = $2`,
-      [agentNum, episodeNum]
+       WHERE runtimestamp = $1 AND agentnum = $2 AND episodenum = $3`,
+      [runtimestamp, agentNum, episodeNum]
     );
 
     console.log("Query executed successfully:", result.rows);
